@@ -17,8 +17,8 @@
 add_filter( 'psp_project_access_meta_query', 'pspsi_alter_access_meta_query', 10, 1 );
 function pspsi_alter_access_meta_query( $args ) {
 
-	$cuser				= wp_get_current_user();
-	$client_meta		= pspsi_client_dynamic_meta_query( pspsi_get_my_client_accounts( $cuser->ID ) );
+	$user_id			= get_current_user_id();
+	$client_meta		= pspsi_client_dynamic_meta_query( pspsi_get_my_client_accounts( $user_id ) );
 	$args 				= array_merge( $args, $client_meta );
 
 }
@@ -36,8 +36,7 @@ function pspsi_get_my_client_accounts( $user_id = null ) {
 
 	if ( $user_id == null ) {
 
-		$user		= wp_get_current_user();
-		$user_id	= $user->ID;
+		$user_id	= get_current_user_id();
 
 	}
 
@@ -71,7 +70,7 @@ function pspsi_client_dynamic_meta_query( $client_ids = null ) {
 		foreach ( $client_ids as $client_id ) {
 
 			$meta_query[] = array(
-				'key'		=> 'pspsi_clients',
+				'key'		=> 'pspsi_projects',
 				'value'		=> $client_id,
 				'compare'	=> 'LIKE',
 			);
@@ -94,21 +93,24 @@ function pspsi_client_dynamic_meta_query( $client_ids = null ) {
 add_filter( 'panorama_check_access', 'pspsi_check_access_on_post', 10, 2 );
 function pspsi_check_access_on_post( $result, $post_id ) {
 
-	$cuser		= wp_get_current_user();
-	$accounts 	= pspsi_get_my_client_accounts( $cuser->ID );
+	$current_user_id = get_current_user_id();
+	$associated_clients = pspsi_get_my_client_accounts( $current_user_id );
 
 	// If the result is false, the user is assigned to clients and the project has clients
 
-	if ( ( $result == false ) && ( ! empty( $accounts ) ) && ( get_field( 'pspsi_clients', $post_id ) ) ) {
+	if ( ( $result == false ) && ( ! empty( $associated_clients ) ) && ( get_field( 'pspsi_projects', $post_id ) ) ) {
 
-		$clients = get_field( 'pspsi_clients' );
+		$projects = get_field( 'pspsi_projects' );
 
-		foreach ( $accounts as $account ) {
-
-			if ( in_array( $account, $clients ) ) {
-
-				$result = true;
-
+		// loop through each associated project
+		foreach ( $projects as $project_id ) {
+			$project = SI_Project::get_instance( $project_id );
+			// loop through each assocated client and check if it's associated with the project
+			foreach ( $associated_clients as $client_id ) {
+				if ( $project->is_client_associated( $client_id ) ) {
+					return true;
+				}
+				continue;
 			}
 		}
 	}
