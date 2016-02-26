@@ -30,7 +30,7 @@ function pspsi_alter_access_meta_query( $args ) {
  * @param 	(int) $user_id 	wp_user ID
  * @return 	(array) 		sa_client post ID's
  **/
-function pspsi_get_my_client_accounts( $user_id ) { 
+function pspsi_get_my_client_accounts( $user_id = NULL ) { 
 	
 	global $wpdb;
 
@@ -81,14 +81,18 @@ function pspsi_client_dynamic_meta_query( $client_ids = NULL ) {
 	
 	$meta_query = array();
 	
-	foreach( $client_ids as $client_id ) { 
+	if( !empty( $client_ids ) ) { 
 	
-		$meta_query[] = array(
-			'key'		=>	'pspsi_clients',
-			'value'		=>	$client_id,
-			'compare'	=>	'LIKE'
-		);
+		foreach( $client_ids as $client_id ) { 
 	
+			$meta_query[] = array(
+				'key'		=>	'pspsi_clients',
+				'value'		=>	$client_id,
+				'compare'	=>	'LIKE'
+			);
+	
+		}
+		
 	}
 	
 	return $meta_query;
