@@ -1,6 +1,6 @@
 <?php
 /**
- * pspsi-fields.php
+ * pspsi-fields.php 
  * Adds required Project Panorama fields for integration
  *
  * @package psp_sprout_invoices
@@ -16,44 +16,40 @@
  **/
 
 add_filter( 'psp_overview_fields', 'pspsi_add_client_field' );
-function pspsi_add_client_field( $fields ) {
+function pspsi_add_client_field( $fields ) { 
 
-	$client_relationship_field	= array(
+	$client_relationship_field	=	array(
 		'key' 				=> 'field_56c8d3f39b1f8',
-		'label' 			=> __( 'Project', 'pspsi' ),
+		'label' 			=> __( 'Sprout Invoice Project', 'pspsi' ),
+		'instructions'		=> __( 'Select a Sprout Invoice project to grant access to associated clients.', 'pspsi' ),
 		'name' 				=> 'pspsi_projects',
-		'type' 				=> 'relationship',
-		'return_format' 	=> 'id',
-		'post_type' 		=> array(
-			0 => SI_Project::POST_TYPE,
+		'type' 				=> 'post_object',
+		'post_type' 		=> array (
+			0 => 'sa_project',
 		),
-		'taxonomy' 			=> array(
+		'taxonomy' 			=> array (
 			0 => 'all',
 		),
-		'filters' 			=> array(
-			0 => 'search',
-		),
-		'result_elements' 	=> array(
-			0 => 'post_title',
-		),
-		'max' => '',
+		'allow_null'		=> 1,
+		'multiple'			=> 0,
 	);
-
+	
 	$new_fields = array();
-
-	foreach ( $fields['fields'] as $field ) {
-
+		
+	foreach( $fields[ 'fields' ] as $field ) {
+		
 		$new_fields[] = $field;
-
-		if ( $field['key'] == 'field_532b8d759c46a' ) {
-
+						
+		if( $field['key'] == 'field_532b8d759c46a' ) {
+			
 			$new_fields[] = $client_relationship_field;
-
+			
 		}
+		
 	}
-
-	$fields['fields'] = $new_fields;
-
+	
+	$fields[ 'fields' ] = $new_fields;
+		
 	return $fields;
 
 }
