@@ -42,12 +42,12 @@ abstract class PSP_SI {
 			$psp_project_id = get_the_id();
 		}
 
-		return get_field( self::META_KEY, $psp_project_id );
+		return get_post_meta( $psp_project_id, self::META_KEY, true );
 
 	}
 
 	public static function get_current_psp_project_id() {
-		return get_field( self::META_KEY, get_the_id() );
+		return get_post_meta( get_the_id(), self::META_KEY, true );
 	}
 
 	public static function load_addon_view( $view, $args, $allow_theme_override = true ) {

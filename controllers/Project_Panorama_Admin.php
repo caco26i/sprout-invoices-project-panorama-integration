@@ -7,50 +7,60 @@
 class PSPSI_Project_Panorama_Admin extends PSP_SI {
 
 	public static function init() {
-
-		// Adds required Project Panorama fields for integration
-		add_filter( 'psp_overview_fields', array( __CLASS__, 'add_client_field' ) );
+		// Meta boxe
+		add_action( 'admin_init', array( __CLASS__, 'register_meta_boxes' ) );
 
 	}
 
+	/////////////////
+	// Meta boxes //
+	/////////////////
+
 	/**
-	 * Adds a new custom field to the Project Panorama page via a filter
-	 * @param (array) $fields Multi dimensional array with existing field data
-	 * @return (array) $fields Modified array with new field added
+	 * Regsiter meta boxes for estimate editing.
+	 *
+	 * @return
 	 */
-	public static function add_client_field( $fields ) {
-		$client_relationship_field	= array(
-			'key' 				=> 'field_56c8d3f39b1f8',
-			'label' 			=> __( 'Sprout Invoice Project', 'pspsi' ),
-			'instructions'		=> __( 'Select a Sprout Invoice project to grant access to associated clients.', 'pspsi' ),
-			'name' 				=> self::META_KEY,
-			'type' 				=> 'post_object',
-			'post_type' 		=> array(
-				0 => 'sa_project',
+	public static function register_meta_boxes() {
+		// estimate specific
+		$args = array(
+			'pspsi' => array(
+				'title' => __( 'Sprout Invoices Integration', 'sprout-invoices' ),
+				'show_callback' => array( __CLASS__, 'show_pspsi_meta_box' ),
+				'save_callback' => array( __CLASS__, 'save_meta_box_pspsi' ),
+				'context' => 'normal',
+				'priority' => 'low',
+				'weight' => 0,
+				'save_priority' => 0,
 			),
-			'taxonomy' 			=> array(
-				0 => 'all',
-			),
-			'allow_null'		=> 1,
-			'multiple'			=> 0,
 		);
+		do_action( 'sprout_meta_box', $args, 'psp_projects' );
+	}
 
-		$new_fields = array();
+	public static function show_pspsi_meta_box( $post, $metabox ) {
 
-		foreach ( $fields['fields'] as $field ) {
+		$si_project_id = get_post_meta( $post->ID, self::META_KEY, true );
+		$invoices = array();
+		$estimates = array();
+		$payments = array();
 
-			$new_fields[] = $field;
-
-			if ( $field['key'] == 'field_532b8d759c46a' ) {
-
-				$new_fields[] = $client_relationship_field;
-
-			}
+		if ( $si_project_id ) {
+			$si_project = SI_Project::get_instance( $si_project_id );
+			$invoices = $si_project->get_invoices();
+			$estimates = $si_project->get_estimates();
+			$payments = $si_project->get_payments();
 		}
 
-		$fields['fields'] = $new_fields;
+		self::load_addon_view( 'admin/meta-boxes/panorama-si', array(
+				'si_project_id' => $si_project_id,
+				'invoices' => $invoices,
+				'estimates' => $estimates,
+				'payments' => $payments,
+		), false );
+	}
 
-		return $fields;
-
+	public static function save_meta_box_pspsi( $post_id, $post, $callback_args, $invoice_id = null ) {
+		$si_project_id = ( isset( $_POST['pspsi_si_project_id'] ) ) ? $_POST['pspsi_si_project_id'] : '' ;
+		update_post_meta( $post_id, self::META_KEY, $si_project_id );
 	}
 }
