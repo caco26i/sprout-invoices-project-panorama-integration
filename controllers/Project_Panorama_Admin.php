@@ -51,6 +51,9 @@ class PSPSI_Project_Panorama_Admin extends PSP_SI {
 			$payments = $si_project->get_payments();
 		}
 
+		wp_enqueue_script( 'select2_4.0' );
+		wp_enqueue_style( 'select2_4.0_css' );
+
 		self::load_addon_view( 'admin/meta-boxes/panorama-si', array(
 				'si_project_id' => $si_project_id,
 				'invoices' => $invoices,
