@@ -26,7 +26,13 @@ define( 'PSPSI_DIR', WP_PLUGIN_DIR . '/' . basename( dirname( __FILE__ ) ) );
  */
 define( 'PSPSI_DIR_FILE', __FILE__ );
 
+define( 'PSPSI_PATH', dirname( __FILE__ ) );
+
+define( 'PSPSI_URL', plugins_url( '', __FILE__ ) );
+
 /**
  * Initialize the plugin
  */
-require_once( 'init.php' );
+require_once( 'load.php' );
+
+add_action( 'plugins_loaded', 'pspsi_load', 999 );
