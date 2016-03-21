@@ -1,0 +1,17 @@
+.psp-admin-table {
+    margin: 15px 0;
+}
+
+.psp-admin-table th {
+    background: #333;
+    color: #fff !important;
+    font-weight: bold;
+}
+
+.pspsi-date {
+    width: 10%;
+}
+
+p.pspsi-meta-project-id {
+    margin-bottom: 25px 0 !important;
+}

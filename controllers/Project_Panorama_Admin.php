@@ -9,6 +9,28 @@ class PSPSI_Project_Panorama_Admin extends PSP_SI {
 	public static function init() {
 		// Meta boxe
 		add_action( 'admin_init', array( __CLASS__, 'register_meta_boxes' ) );
+		// stylesheets
+		add_action( 'admin_enqueue_scripts', array( __CLASS__, 'enqueue_admin_styles' ) );
+
+	}
+
+	/**
+	 * Enqueue admin stylesheet
+	 *
+	 * @return
+	 */
+
+	public static function enqueue_admin_styles( $hook ) {
+
+		$screen = get_current_screen();
+
+		wp_register_style( 'pspsi-admin', PSPSI_URL . '/assets/css/admin.css', false, PSPSI_VER );
+
+		if( $screen->post_type == 'psp_projects' ) {
+
+			wp_enqueue_style( 'pspsi-admin' );
+
+		}
 
 	}
 

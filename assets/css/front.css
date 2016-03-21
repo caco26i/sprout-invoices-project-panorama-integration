@@ -1,0 +1,145 @@
+/*
+ * Table Styling
+ */
+
+.pspsi-table {
+    margin: 20px 0;
+    border: 0px;
+    width: 100%;
+    background: #fff;
+    border-collapse: collapse;
+}
+
+.pspsi-table,
+.pspsi-table tr,
+.pspsi-table thead,
+.pspsi-table tbody,
+.pspsi-table tfoot {
+    width: 100%;
+}
+
+.pspi-table tr {
+    width: 100%;
+}
+
+.pspsi-table th {
+    background: #2a3542;
+    color: #fff;
+    color: rgba(255,255,255,.75);
+    text-align: left;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+.pspsi-table th:first-child {
+    width: 150px;
+}
+
+.pspsi-table th {
+    border: 0px;
+    padding: 10px 15px;
+}
+.pspsi-table td {
+    border: 0px;
+    padding: 5px 15px;
+}
+
+.pspsi-table td {
+    background: #fcfcfc;
+}
+
+.pspsi-table tr td {
+    border-top: 1px solid #efefef;
+}
+
+.pspsi-table tr.info_row td {
+    border: 0px;
+}
+
+.pspsi-table tfoot td {
+    background: #f4f6fa;
+}
+
+/*
+ * Status Labels
+ */
+
+.pspsi-invoice-label,
+.pspsi-estimate-label {
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 3px;
+    background: #f6f6f6;
+    color: #555;
+    font-weight: bold;
+}
+
+.pspsi-status-temp {
+
+}
+
+.pspsi-status-pending {
+    background: #eee;
+}
+
+.pspsi-status-partial {
+    background: #b1c09d;
+    color: #fff;
+}
+
+.pspsi-status-exp,
+.pspsi-status-complete {
+    background: #99c262;
+    color: #fff;
+}
+
+.pspsi-status-exp time {
+    color: #fff !important;
+}
+
+.pspsi-table time {
+    color: #555;
+}
+
+.pay_link,
+.est_action_link {
+    background: #3299bb;
+    color: #fff !important;
+    padding: 5px 20px;
+    border-radius: 3px;
+    color: #fff;
+    line-height: 1em;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.pay_link:hover,
+.est_action_link:hover {
+    opacity: 0.8;
+}
+
+.psp-text-right {
+    text-align: right;
+}
+
+/* Info Row */
+
+.pspsi-table .info_row small {
+    display: inline-block;
+    color: #444;
+    padding: 0 10px;
+}
+
+.pspsi-table .info_row strong {
+    font-size: 12px;
+}
+
+.si_payment_history {
+    padding: 10px 15px;
+    margin: 5px 0;
+    background: #f6f6f6;
+    border-radius: 8px;
+}

@@ -30,6 +30,8 @@ define( 'PSPSI_PATH', dirname( __FILE__ ) );
 
 define( 'PSPSI_URL', plugins_url( '', __FILE__ ) );
 
+define( 'PSPSI_VER', '1.0' );
+
 /**
  * Initialize the plugin
  */
