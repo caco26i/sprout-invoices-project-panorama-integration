@@ -1,5 +1,4 @@
 <p class="pspsi-meta-project-id"><label for="pspsi_si_project_id"><?php esc_html_e( 'Sprout Invoices Project' ); ?></label> <?php si_projects_select( $si_project_id, 0, true, 'pspsi_si_project_id' ) ?></p>
-
 <table class="widefat psp-admin-table">
 	<thead>
 		<tr>
@@ -7,7 +6,7 @@
 		</tr>
 	</thead>
 	<tbody>
-		<?php if( ! empty( $invoices ) ) : ?>
+		<?php if ( ! empty( $invoices ) ) : ?>
 			<?php foreach ( $invoices as $invoice_id ) : ?>
 				<tr>
 					<td class="pspsi-date"><?php echo get_post_time( get_option( 'date_format' ), false, $invoice_id ) ?></td>
@@ -45,3 +44,8 @@
 	<?php endif ?>
 	</tbody>
 </table>
+<script type="text/javascript">
+	jQuery(function() {
+		jQuery('.select2').select2();
+	});
+</script>

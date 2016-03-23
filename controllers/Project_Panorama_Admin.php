@@ -26,7 +26,7 @@ class PSPSI_Project_Panorama_Admin extends PSP_SI {
 
 		wp_register_style( 'pspsi-admin', PSPSI_URL . '/assets/css/admin.css', false, PSPSI_VER );
 
-		if( $screen->post_type == 'psp_projects' ) {
+		if ( $screen->post_type == 'psp_projects' ) {
 
 			wp_enqueue_style( 'pspsi-admin' );
 

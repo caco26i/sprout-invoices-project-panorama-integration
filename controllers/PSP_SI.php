@@ -46,6 +46,32 @@ abstract class PSP_SI {
 
 	}
 
+	public static function get_psp_project_id_from_si_project_id( $si_project_id = 0 ) {
+		if ( ! $si_project_id ) {
+			$si_project_id = get_the_id();
+		}
+
+		$args = array(
+			'post_type' => 'psp_projects',
+			'post_status' => 'any',
+			'posts_per_page' => -1,
+			'fields' => 'ids',
+			'meta_query' => array(
+					array(
+						'key' => self::META_KEY,
+						'value' => $si_project_id,
+						),
+				),
+
+		);
+		$find = get_posts( $args );
+		if ( empty( $find ) ) {
+			return 0;
+		}
+		return (int) $find[0];
+
+	}
+
 	public static function get_current_psp_project_id() {
 		return get_post_meta( get_the_id(), self::META_KEY, true );
 	}
