@@ -82,10 +82,14 @@ class PSPSI_Project_Panorama_Access extends PSP_SI {
 		if ( ! empty( $project_ids ) ) {
 			foreach ( $project_ids as $project_id ) {
 
-				$meta_query[] = array(
-					'key'		=> self::META_KEY,
-					'value'		=> $project_id, // TODO this should just be an array?
-				);
+				if( !empty( $project_id ) ) {
+
+					$meta_query[] = array(
+						'key'		=> self::META_KEY,
+						'value'		=> $project_id, // TODO this should just be an array?
+					);
+
+				}
 
 			}
 		}
