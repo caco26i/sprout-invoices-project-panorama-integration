@@ -2,7 +2,7 @@
 
 /**
  * @package psp_sprout_invoices
- * @version 1.1
+ * @version 1.2
  */
 
 /*
@@ -10,7 +10,7 @@
  * Plugin URI: https://www.projectpanorama.com/add-ons/sprout-invoices
  * Description: Integrate <a href="https://sproutapps.co/sprout-invoices/" target="_new">Sprout Invoices</a> with Project Panorama
  * Author: Snap Orbital & Sprout Apps
- * Version: 1.0
+ * Version: 1.2
  * Author URI: https://snaporbital.com
  * Text Domain: pspsi
  * Domain Path: languages

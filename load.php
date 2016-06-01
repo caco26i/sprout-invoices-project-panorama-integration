@@ -8,7 +8,10 @@
  */
 
 function pspsi_load() {
-
+	if ( ! class_exists( 'SI_Project' ) ) {
+		add_action( 'admin_head', 'pspsi_compatibility_check_fail_notices' );
+		return;
+	}
 	require_once PSPSI_DIR . '/controllers/PSP_SI.php';
 	require_once PSPSI_DIR . '/controllers/Project_Panorama_Access.php';
 	require_once PSPSI_DIR . '/controllers/Project_Panorama_Admin.php';
@@ -24,5 +27,15 @@ function pspsi_load() {
 
 	do_action( 'pspsi_loaded' );
 
+}
+
+/**
+ * Error messaging for compatibility check.
+ * @return string error messages
+ */
+function pspsi_compatibility_check_fail_notices() {
+	if ( ! class_exists( 'SI_Project' ) ) {
+		printf( '<div class="error"><p>The free or paid version of <a href="%s"><strong>Sprout Invoices</strong></a> is required for "Panorama Sprout Invoices" to be useful.</p></div>', 'http://sproutapps.co/sprout-invoices/' );
+	}
 }
 
