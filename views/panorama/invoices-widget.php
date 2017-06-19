@@ -24,6 +24,10 @@
 							continue;
 						}
 
+						if ( 'temp' === si_get_invoice_status( $invoice_id ) ) {
+							continue;
+						}
+
 						if ( 'archived' === si_get_invoice_status( $invoice_id ) ) {
 							continue;
 						}
