@@ -28,6 +28,10 @@
 							continue;
 						}
 
+						if ( 'scheduled' === si_get_invoice_status( $invoice_id ) ) {
+							continue;
+						}
+
 						if ( 'write-off' === si_get_invoice_status( $invoice_id ) ) {
 							continue;
 						}

@@ -23,6 +23,10 @@
 							continue;
 						}
 
+						if ( 'scheduled' === si_get_estimate_status( $estimate_id ) ) {
+							continue;
+						}
+
 						if ( 'archived' === si_get_estimate_status( $estimate_id ) ) {
 							continue;
 						}
