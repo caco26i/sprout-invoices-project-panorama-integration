@@ -32,7 +32,7 @@
 							continue;
 						}
 
-						if ( 'scheduled' === si_get_invoice_status( $invoice_id ) ) {
+						if ( 'future' === si_get_invoice_status( $invoice_id ) ) {
 							continue;
 						}
 
