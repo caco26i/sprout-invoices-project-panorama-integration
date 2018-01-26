@@ -1,0 +1,19 @@
+{
+  "name": "SproutApps/sprout-invoices-project-panorama-integration",
+  "description": "A place where two great WordPress plugins share code to make each other better.",
+  "keywords": ["wordpress", "plugin", "SproutApps", "SproutInvoices", "ProjectPanorama"],
+  "homepage": "https://www.projectpanorama.com/send-invoices-collect-payments-sprout-invoices-project-panorama/",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Ross Johnson",
+      "email": " info@37designs.com",
+      "homepage": "https://3.7designs.co/"
+    }
+  ],
+  "type": "wordpress-plugin",
+  "require": {
+    "php": ">=5.3.2",
+    "composer/installers": "v1.0.6"
+  }
+}
